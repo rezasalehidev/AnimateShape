@@ -13,6 +13,7 @@ const COLORS = {
 const SQUARE_SIZE = 60;
 const VERTICAL = (height - SQUARE_SIZE) / 2;
 const HORIZONTAL = (width - SQUARE_SIZE) / 2;
+const Rotate = "45deg";
 const TOGGLE_VALUE = new Animated.Value(0);
 
 export default function App() {
@@ -31,28 +32,69 @@ export default function App() {
         outputRange: [VERTICAL, VERTICAL + 30, VERTICAL + 40, VERTICAL + 50],
     });
 
+    const squareRotate1 = TOGGLE_VALUE.interpolate({
+        inputRange: [0, 0.25, 0.5, 0.75, 1],
+        outputRange: [Rotate, "90deg", "180deg", "360deg", "45deg"],
+    });
+
+    const colorRotate1 = TOGGLE_VALUE.interpolate({
+        inputRange: [0, 0.25, 0.5, 0.75, 1],
+        outputRange: [COLORS.yellow, COLORS.pink, COLORS.violet, COLORS.magenta, COLORS.yellow],
+    });
+
+    // 2
     const square2 = TOGGLE_VALUE.interpolate({
         inputRange: [0, 0.5, 0.75, 1],
         outputRange: [HORIZONTAL, HORIZONTAL + 30, HORIZONTAL + 40, HORIZONTAL + 50],
     });
 
+    const square2Rotate = TOGGLE_VALUE.interpolate({
+        inputRange: [0, 0.25, 0.5, 0.75, 1],
+        outputRange: [Rotate, "90deg", "180deg", "360deg", "45deg"],
+    });
+    const colorRotate2 = TOGGLE_VALUE.interpolate({
+        inputRange: [0, 0.25, 0.5, 0.75, 1],
+        outputRange: [COLORS.Pink, COLORS.yellow, COLORS.violet, COLORS.magenta, COLORS.Pink],
+    });
+
+    // 3
     const square3 = TOGGLE_VALUE.interpolate({
         inputRange: [0, 0.5, 0.75, 1],
         outputRange: [VERTICAL, VERTICAL - 30, VERTICAL - 40, VERTICAL - 50],
     });
 
+    const square3Rotate = TOGGLE_VALUE.interpolate({
+        inputRange: [0, 0.25, 0.5, 0.75, 1],
+        outputRange: [Rotate, "90deg", "180deg", "360deg", "45deg"],
+    });
+
+    const colorRotate3 = TOGGLE_VALUE.interpolate({
+        inputRange: [0, 0.25, 0.5, 0.75, 1],
+        outputRange: [COLORS.magenta, COLORS.pink, COLORS.violet, COLORS.yellow, COLORS.magenta],
+    });
+
+    // 4
     const square4 = TOGGLE_VALUE.interpolate({
         inputRange: [0, 0.5, 0.75, 1],
         outputRange: [HORIZONTAL, HORIZONTAL - 30, HORIZONTAL - 40, HORIZONTAL - 50],
     });
 
+    const square4Rotate = TOGGLE_VALUE.interpolate({
+        inputRange: [0, 0.25, 0.5, 0.75, 1],
+        outputRange: [Rotate, "90deg", "180deg", "360deg", "45deg"],
+    });
+    const colorRotate4 = TOGGLE_VALUE.interpolate({
+        inputRange: [0, 0.25, 0.5, 0.75, 1],
+        outputRange: [COLORS.violet, COLORS.pink, COLORS.yellow, COLORS.magenta, COLORS.violet],
+    });
+
     return (
         <View style={{ flex: 1 }}>
             <TouchableOpacity onPress={() => handleToggle()}>
-                <Animated.View style={StyleSheet.flatten([styles.square, styles.square1, { top: square1 }])} />
-                <Animated.View style={StyleSheet.flatten([styles.square, styles.square2, { left: square2 }])} />
-                <Animated.View style={StyleSheet.flatten([styles.square, styles.square3, { top: square3 }])} />
-                <Animated.View style={StyleSheet.flatten([styles.square, styles.square4, { left: square4 }])} />
+                <Animated.View style={StyleSheet.flatten([styles.square, styles.square1, { backgroundColor: colorRotate1, top: square1, transform: [{ rotate: squareRotate1 }] }])} />
+                <Animated.View style={StyleSheet.flatten([styles.square, styles.square2, { left: square2, transform: [{ rotate: square2Rotate }] }])} />
+                <Animated.View style={StyleSheet.flatten([styles.square, styles.square3, { top: square3, transform: [{ rotate: square3Rotate }] }])} />
+                <Animated.View style={StyleSheet.flatten([styles.square, styles.square4, { left: square4, transform: [{ rotate: square4Rotate }] }])} />
             </TouchableOpacity>
         </View>
     );
